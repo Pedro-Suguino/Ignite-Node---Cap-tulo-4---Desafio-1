@@ -35,7 +35,9 @@ export class AuthenticateUserUseCase {
 
     const { secret, expiresIn } = authConfig.jwt;
 
-    const token = sign({ user }, secret, {
+    const actualSecret = process.env.JWT_SECRET as string;
+
+    const token = sign({ user }, actualSecret, {
       subject: user.id,
       expiresIn,
     });
